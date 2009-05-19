@@ -1,0 +1,42 @@
+8
+
+dir
+4
+http://caronstephane@caronstephane.svn.beanstalkapp.com/prettyphoto/trunk/css
+http://caronstephane@caronstephane.svn.beanstalkapp.com/prettyphoto
+
+
+
+2008-06-04T22:22:33.985928Z
+2
+caronstephane
+
+
+svn:special svn:externals svn:needs-lock
+
+layout.css
+file
+
+
+
+
+2008-04-16T20:05:29.000000Z
+61d1e62e5431ad4599abda2bfd7aaffd
+2008-06-04T22:22:33.985928Z
+2
+caronstephane
+has-props
+
+prettyPhoto.css
+file
+
+
+
+
+2008-06-04T20:35:50.000000Z
+e15cd9f0e541334c03f86f64173f60d1
+2008-06-04T22:22:33.985928Z
+2
+caronstephane
+has-props
+

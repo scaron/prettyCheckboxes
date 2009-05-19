@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>prettyCheckboxes - custom checkboxes / radio buttons - by Stephane Caron</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+		<script type="text/javascript" charset="utf-8">
+			google.load("jquery", "1.3.2");
+		</script>
+
+
+		<script src="../static/js/common.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="js/prettyCheckboxes.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="css/prettyCheckboxes.css" type="text/css" media="screen" title="prettyComment main stylesheet" charset="utf-8" />
+	</head>
+	<body>
+		<div id="wrap">
+			<form id="checkboxDemo" action="checkvalues.php" method="post">
+				<fieldset>
+					<legend>Custom checkboxes</legend>
+
+					<label for="checkbox-1" tabindex="1">Item 1</label>
+					<input type="checkbox" name="checkbox-1[braket]" id="checkbox-1" value="checkbox-1" onclick="alert('this checkbox has an onclick event');" />
+
+					<label for="checkbox-2" tabindex="2">Item 2, this item is slightly longer to go on 2 lines.</label>
+					<input type="checkbox" name="checkbox-2[braket]" id="checkbox-2" value="checkbox-2" />
+
+					<label for="checkbox-3" tabindex="3">Item 3</label>
+					<input type="checkbox" name="checkbox-3[braket]" id="checkbox-3" value="checkbox-3" />
+
+					<label for="checkbox-4" tabindex="4">Item 4</label>
+
+					<input type="checkbox" name="checkbox-4[braket]" id="checkbox-4" value="checkbox-4" />
+				
+					<label for="checkbox-5" tabindex="5">Check all</label>
+					<input type="checkbox" name="checkbox-5[braket]" id="checkbox-5" value="checkbox-5" onclick="checkAllPrettyCheckboxes(this,$('#checkboxDemo'))" />
+		
+					<input type="button" value="Check values!" onclick="javascript:checkValues('checkboxDemo'); return false;" class="button" />
+					
+					<input type="submit">
+				</fieldset>
+			</form>
+			
+			<br class="cboth" /><br />
+
+			<form id="radioDemo" action="checkvalues.php" method="post">
+
+				<fieldset>
+					<legend>Custom radio buttons</legend>
+					<label for="radio-1" tabindex="1">Item 1</label>
+					<input type="radio" name="radio-button[array1]" id="radio-1" value="radio-1" />
+
+					<label for="radio-2" tabindex="2">Item 2</label>
+					<input type="radio" name="radio-button[array1]" id="radio-2" value="radio-2" onclick="alert('this radio has an onclick event');" />
+
+					<label for="radio-3" tabindex="3">Item 3, this item is slightly longer to go on 2 lines.</label>
+
+					<input type="radio" name="radio-button[array1]" id="radio-3" value="radio-3" />
+
+					<label for="radio-4" tabindex="4">Item 4</label>
+					<input type="radio" name="radio-button[array1]" id="radio-4" value="radio-4" />
+		
+					<input type="button" value="Check values!" onclick="javascript:checkValues('radioDemo'); return false;" class="button" />
+					<input type="submit">
+				</fieldset>
+			</form>
+	
+			<br class="cboth" /><br />
+	
+			<form class="inlineRadios" action="checkvalues.php">
+
+				<fieldset>
+					<legend>Inline radio buttons</legend>
+					<label for="radio-5" tabindex="1">Item 1</label>
+					<input type="radio" name="radio-button-inline" id="radio-5" value="radio-1" />
+
+					<label for="radio-6" tabindex="2">Item 2</label>
+					<input type="radio" name="radio-button-inline" id="radio-6" value="radio-2" />
+
+					<label for="radio-7" tabindex="3">Item 3</label>
+
+					<input type="radio" name="radio-button-inline" id="radio-7" value="radio-3" />
+
+					<label for="radio-8" tabindex="4">Item 4</label>
+					<input type="radio" name="radio-button-inline" id="radio-8" value="radio-4" />
+				</fieldset>
+			</form>
+		</div>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$('#checkboxDemo input[type=checkbox],#radioDemo input[type=radio]').prettyCheckboxes();
+				$('.inlineRadios input[type=radio]').prettyCheckboxes({'display':'inline'});
+			});
+		</script>
+
+	</body>
+</html>

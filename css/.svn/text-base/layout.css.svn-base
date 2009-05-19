@@ -1,0 +1,102 @@
+/* ------------------------------------------------------------------------
+	Content Redefinition
+------------------------------------------------------------------------- */
+
+	* { margin: 0; padding: 0; border: 0; } 
+
+	body {
+		font: 62.5%/1.2 Verdana, Arial, Sans-Serif;
+		letter-spacing: 0.02em;
+		background: #e7eff0;
+		color: #9db2b9;
+		text-align: left;
+	}
+
+	a { color: #9db2b9; }
+	a:hover { text-decoration: none; }
+	a:focus { outline: none; }
+
+	a.arrow { padding: 0 0 0 25px; background: url(images/all/backgrounds/arrow.gif) top left no-repeat; }
+
+	p { font-size: 1.2em; }
+
+	h1, h2, h3, h4, h5, h6, p { margin: 0 0 10px 0; }
+	
+	h1 { margin: 0; }
+	
+	h2, h3 {
+		font-size: 1.4em;
+		border-bottom: 1px #9db2b9 solid;
+		padding: 0 0 5px 0;
+		margin: 0 0 10px 0;
+	}
+	
+	h3 { margin: 20px 0 10px 0; }
+	
+	code {
+		font: 1.3em Verdana, Arial, Sans-Serif;
+		padding: 0 10px;
+		display: block;
+		border-left: 4px #bfc6c7 solid;
+		background: #E7EFF0;
+		color: #000;
+	}
+	
+	.highlight {
+		background: #E7EFF0;
+		color: #000;
+		padding: 0 5px;
+	}
+
+
+/* ------------------------------------------------------------------------
+	Layout
+------------------------------------------------------------------------- */
+
+	#content {
+		width: 900px;
+		padding: 30px;
+		margin: 0 auto 20px auto;
+		background: #fff;
+		border: 4px #000 double; border-top: 0;
+	}
+	
+	ul.gallery {
+		list-style: none;
+		margin: 0 0 10px 0;
+	}
+	
+		ul.gallery li {
+			display: block;
+			float: left;
+			margin: 0 5px 0 0;
+		}
+		
+			ul.gallery li a {
+				padding: 2px;
+				display: block;
+				border: 4px #9db2b9 double;
+				line-height: 0;
+			}
+			
+			ul.gallery li a:hover { border: 4px #000 double; }
+
+
+/* ------------------------------------------------------------------------
+	Miscellaneous
+------------------------------------------------------------------------- */
+
+	.clearfix:after {
+	    content: "."; 
+	    display: block; 
+	    height: 0; 
+	    clear: both; 
+	    visibility: hidden;
+	}
+
+	.clearfix {display: inline-block;}
+
+	/* Hides from IE-mac \*/
+	* html .clearfix {height: 1%;}
+	.clearfix {display: block;}
+	/* End hide from IE-mac */

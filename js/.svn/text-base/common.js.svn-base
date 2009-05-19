@@ -1,0 +1,9 @@
+$(document).ready(function(){
+	links.setTarget();
+});
+
+links = {
+	setTarget : function(){
+		$("a[rel^='external']").attr('target','_blank');
+	}
+}
