@@ -39,6 +39,11 @@
 
 			// Associate the click event
 			$label.bind('click',function(){
+				// Do not check label if the input is disabled
+				if($('input#' + $(this).attr('for')).is(':disabled')){
+					return false;
+				}
+
 				$('input#' + $(this).attr('for')).triggerHandler('click');
 				
 				if($('input#' + $(this).attr('for')).is(':checkbox')){
