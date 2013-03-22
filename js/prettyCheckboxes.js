@@ -1,96 +1,119 @@
 /* ------------------------------------------------------------------------
 	prettyCheckboxes
-	
+
 	Developped By: Stephane Caron (http://www.no-margin-for-errors.com)
+	Refactoring by: Norlin (http://github.com/norlin)
 	Inspired By: All the non user friendly custom checkboxes solutions ;)
-	Version: 1.1
-	
+	Version: 1.2
+
 	Copyright: Feel free to redistribute the script/modify it, as
-			   long as you leave my infos at the top.
+				long as you leave my infos at the top.
 ------------------------------------------------------------------------- */
-	
-	jQuery.fn.prettyCheckboxes = function(settings) {
-		settings = jQuery.extend({
-					checkboxWidth: 17,
-					checkboxHeight: 17,
-					className : 'prettyCheckbox',
-					display: 'list'
-				}, settings);
 
-		$(this).each(function(){
-			// Find the label
-			$label = $('label[for="'+$(this).attr('id')+'"]');
+jQuery.fn.prettyCheckboxes = function(settings) {
+	var classes = {
+			checked: 'checked',
+			holder: 'holder',
+			holderWrap: 'holderWrap',
+			hidden: 'hiddenCheckbox'
+		},
+		template = '<span class="' + classes.holderWrap + '"><span class="' + classes.holder + '"></span></span>';
 
-			// Add the checkbox holder to the label
-			$label.prepend("<span class='holderWrap'><span class='holder'></span></span>");
+	settings = jQuery.extend({
+				checkboxWidth: 17,
+				checkboxHeight: 17,
+				className : 'prettyCheckbox',
+				display: 'list'
+			}, settings);
 
-			// If the checkbox is checked, display it as checked
-			if($(this).is(':checked')) { $label.addClass('checked'); };
+	$(this).each(function () {
+		// Find the label
+		var $input = $(this),
+			$label = $('label[for="' + $input.attr('id') + '"]');
 
-			// Assign the class on the label
-			$label.addClass(settings.className).addClass($(this).attr('type')).addClass(settings.display);
+		// Add the checkbox holder to the label
+		$label.prepend(template);
 
-			// Assign the dimensions to the checkbox display
-			$label.find('span.holderWrap').width(settings.checkboxWidth).height(settings.checkboxHeight);
-			$label.find('span.holder').width(settings.checkboxWidth);
+		// If the checkbox is checked, display it as checked
+		if ($input.is(':checked')) {
+			$label.addClass(classes.checked);
+		}
 
-			// Hide the checkbox
-			$(this).addClass('hiddenCheckbox');
+		// Assign the class on the label
+		$label.addClass(settings.className).
+			addClass($input.attr('type')).
+			addClass(settings.display);
 
-			// Associate the click event
-			$label.bind('click',function(){
-				$('input#' + $(this).attr('for')).triggerHandler('click');
-				
-				if($('input#' + $(this).attr('for')).is(':checkbox')){
-					$(this).toggleClass('checked');
-					$('input#' + $(this).attr('for')).checked = true;
-					
-					$(this).find('span.holder').css('top',0);
-				}else{
-					$toCheck = $('input#' + $(this).attr('for'));
+		// Assign the dimensions to the checkbox display
+		$label.find('.' + classes.holderWrap).
+				width(settings.checkboxWidth).
+				height(settings.checkboxHeight);
 
-					// Uncheck all radio
-					$('input[name="'+$toCheck.attr('name')+'"]').each(function(){
-						$('label[for="' + $(this).attr('id')+'"]').removeClass('checked');	
-					});
+		$label.find('.' + classes.holder).
+				width(settings.checkboxWidth);
 
-					$(this).addClass('checked');
-					$toCheck.checked = true;
-				};
-			});
-			
-			$('input#' + $label.attr('for')).bind('keypress',function(e){
-				if(e.keyCode == 32){
-					if($.browser.msie){
-						$('label[for="'+$(this).attr('id')+'"]').toggleClass("checked");
-					}else{
-						$(this).trigger('click');
-					}
-					return false;
-				};
-			});
+		// Hide the checkbox
+		$input.addClass(classes.hidden);
+
+		// Associate the click event
+		$label.click(function(){
+			if ($input.is(':disabled')) {
+				return false;
+			}
+
+			$input.triggerHandler('click');
+
+			if ($input.is(':checkbox')){
+				$label.toggleClass(classes.checked);
+				$input.checked = true;
+
+				$label.find('.' + classes.holder).css('top',0);
+			} else {
+				// Uncheck all radio
+				$('input[name="' + $input.attr('name') + '"]').each(function () {
+					$('label[for="' + this.id + '"]').removeClass(classes.checked);
+				});
+
+				$input.addClass(classes.checked);
+				$input.checked = true;
+			}
 		});
-	};
-	
-	checkAllPrettyCheckboxes = function(caller, container){
-		if($(caller).is(':checked')){
-			// Find the label corresponding to each checkbox and click it
-			$(container).find('input[type=checkbox]:not(:checked)').each(function(){
-				$('label[for="'+$(this).attr('id')+'"]').trigger('click');
-				if($.browser.msie){
-					$(this).attr('checked','checked');
-				}else{
-					$(this).trigger('click');
-				};
-			});
-		}else{
-			$(container).find('input[type=checkbox]:checked').each(function(){
-				$('label[for="'+$(this).attr('id')+'"]').trigger('click');
-				if($.browser.msie){
-					$(this).attr('checked','');
-				}else{
-					$(this).trigger('click');
-				};
-			});
-		};
-	};
+
+		$input.keypress(function(e) {
+			if (e.keyCode == 32){
+				if ($.browser.msie){
+					$label.toggleClass(classes.checked);
+				} else {
+					$input.trigger('click');
+				}
+
+				return false;
+			}
+		});
+	});
+};
+
+var checkAllPrettyCheckboxes = function(caller, container){
+	var $container = $(container),
+		$inputs = $container.find('input[type=checkbox]');
+
+	// Find the label corresponding to each checkbox...
+	if ($(caller).is(':checked')) {
+		$inputs = $inputs.not(':checked');
+	} else {
+		$inputs = $inputs.filter(':checked');
+	}
+
+	//...and click it
+	$inputs.each(function(){
+		var $this = $(this);
+
+		$('label[for="' + this.id + '"]').trigger('click');
+
+		if ($.browser.msie) {
+			$this.attr('checked','checked');
+		} else {
+			$this.trigger('click');
+		}
+	});
+};
