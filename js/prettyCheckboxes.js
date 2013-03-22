@@ -74,7 +74,7 @@ jQuery.fn.prettyCheckboxes = function(settings) {
 					$('label[for="' + this.id + '"]').removeClass(classes.checked);
 				});
 
-				$input.addClass(classes.checked);
+				$label.addClass(classes.checked);
 				$input.checked = true;
 			}
 		});
